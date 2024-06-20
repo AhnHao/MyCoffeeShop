@@ -5,6 +5,8 @@ const connectDB = require('./config/database')
 
 const User = require('./models/user')
 
+const errorController = require('./controllers/error')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -27,6 +29,8 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes)
 app.use(shopRoutes)
+
+app.use(errorController.get404)
 
 connectDB()
 

@@ -1,37 +1,38 @@
-<header class="header">
-  <div class="container">
-      <div class="row">
-          <!-- navbar -->
-            <div class="header__navbar">
-                <ul class="header__navbar-list">
-                    <li class="header__navbar-item">
-                        <a href="/" class="header__navbar-link <%= path === '/' ? 'active' : '' %>">Home</a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a href="/menu" class="header__navbar-link <%= path === '/menu' ? 'active' : '' %>">Menu</a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a href="/cart" class="header__navbar-link <%= path === '/cart' ? 'active' : '' %>">Cart</a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a href="/order" class="header__navbar-link <%= path === '/order' ? 'active' : '' %>">Order</a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a href="/admin/add-product" class="header__navbar-link <%= path === '/admin/add-product' ? 'active' : '' %>">Add product</a>
-                    </li>
-                    <li class="header__navbar-item">
-                        <a href="/admin/products" class="header__navbar-link <%= path === '/admin/products' ? 'active' : '' %>">Admin products</a>
-                    </li>
-                </ul>
-                <ul class="header__navbar-list">
-                  <li class="header__navbar-item">
-                    <a href="/login" class="header__navbar-link">Login</a>
-                  </li>
-                  <li class="header__navbar-item">
-                    <a href="/logout" class="header__navbar-link">Logout</a>
-                  </li> 
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg" style="background-color: #502e2c;">
+    <div class="container">
+      <a class="navbar-brand text-white" href="#">Anteiku</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/' ? 'active' : 'text-white' %>" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/menu' ? 'active' : 'text-white' %>" href="/menu">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/cart' ? 'active' : 'text-white' %>" href="/cart">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/orders' ? 'active' : 'text-white' %>" href="/orders">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/admin/add-product' ? 'active' : 'text-white' %>" href="/admin/add-product">Add Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-4 <%= path === '/admin/products' ? 'active' : 'text-white' %>" href="/admin/products">Admin Products</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link px-4 <%= path === '' ? 'active' : 'text-white' %>" href="/">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 <%= path === '' ? 'active' : 'text-white' %>" href="/">sign up</a>
+              </li>
+        </ul>
       </div>
-  </div>
-</header>
+    </div>
+</nav>
