@@ -11,10 +11,8 @@ html {
 }
 
 .main {
-  margin-top: 50px;
-  background-color: #e6e6e6;
 }
 
-.nav-link.active {
-  color: yellow;
+.product-img {
+  height: 180px;
 }

@@ -10,4 +10,10 @@ router.get('/menu', shopController.getMenu)
 
 router.get('/menu/:productId', shopController.getProduct)
 
+router.get('/cart', shopController.getCart)
+
+router.post('/cart', shopController.postCart)
+
+router.post('/cart-delete-product', shopController.postCartDeleteProduct)
+
 module.exports = router
