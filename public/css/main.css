@@ -10,9 +10,10 @@ html {
   scroll-behavior: smooth;
 }
 
-.main {
-}
-
 .product-img {
   height: 180px;
+}
+
+.img-logo {
+  width: 120px;
 }

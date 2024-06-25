@@ -3,19 +3,20 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main class="main">
-            <div class="container">
+            <div class="container my-5">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="product__image">
-                            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
-                        </div>
+                    <div class="col-md-6">
+                        <img src="<%= product.imageUrl %>" class="img-fluid rounded border border-black" alt="<%= product.title %>">
                     </div>
-                    <div class="col-6">
-                        <div class="product_info">
-                            <h1><%= product.title %></h1>
-                            <h2><%= product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %></h2>
-                            <p><%= product.description %></p>
-                        </div>
+                    <div class="col-md-6">
+                        <h1 class="display-5"><%= product.title %></h1>
+                        <p class="lead"><%= product.description %></p>
+                        <h3 class="text-primary"><%= product.price.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %></h3>
+                        <!-- <p class="mt-4">Mô tả chi tiết về sản phẩm. Thông tin này có thể bao gồm các đặc điểm nổi bật, chức năng, và lợi ích của sản phẩm.</p> -->
+                        <form action="/cart" method="POST">
+                            <input type="hidden" name="productId" value="<%= product._id %>">
+                            <button class="btn btn-success btn-lg mt-3" type="submit">Add To Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
