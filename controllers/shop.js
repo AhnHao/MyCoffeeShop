@@ -1,6 +1,5 @@
 const Product = require('../models/product')
 const Order = require('../models/order')
-const order = require('../models/order')
 
 exports.getIndex = (req, res) => {
   Product.find()
@@ -104,7 +103,7 @@ exports.postOrder = (req, res) => {
       const order = new Order({
         products: products,
         user: {
-          email: req.user.email,
+          username: req.user.username,
           userId: req.user
         }
       })

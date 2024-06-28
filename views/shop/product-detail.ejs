@@ -13,10 +13,12 @@
                         <p class="lead"><%= product.description %></p>
                         <h3 class="text-primary"><%= product.price.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %></h3>
                         <!-- <p class="mt-4">Mô tả chi tiết về sản phẩm. Thông tin này có thể bao gồm các đặc điểm nổi bật, chức năng, và lợi ích của sản phẩm.</p> -->
-                        <form action="/cart" method="POST">
-                            <input type="hidden" name="productId" value="<%= product._id %>">
-                            <button class="btn btn-success btn-lg mt-3" type="submit">Add To Cart</button>
-                        </form>
+                        <% if(isAuthenticated) { %>
+                            <form action="/cart" method="POST">
+                                <input type="hidden" name="productId" value="<%= product._id %>">
+                                <button class="btn btn-success btn-lg mt-3" type="submit">Add To Cart</button>
+                            </form>
+                        <% } %>
                     </div>
                 </div>
             </div>
