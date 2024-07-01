@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <div class="container mt-3">
+            <div class="row">
+                <% if(errorMessage) { %>
+                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                <% } %>
+            </div>
+            <div class="row">
+                <form action="/reset" method="POST">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" name="email" id="email" placeholder="example@coffee.com">
+                    </div>
+        
+                    <button type="submit" class="btn btn-primary">Reset Password</button>
+                </form>
+            </div>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>

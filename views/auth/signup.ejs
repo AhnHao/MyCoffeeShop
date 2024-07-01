@@ -1,56 +1,61 @@
 <%- include('../includes/head.ejs') %>
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include('../includes/navigation.ejs') %>
-    <section class="vh-100 my-5 bg-image"
-  style="background-image: url('');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+      <section class="vh-100 my-5 bg-image" style="background-image: url('');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+          <div class="container h-100">
+            <div class="row mb-3">
+              <% if (errorMessage) { %>
+                <div class="user-message user-message--error"><%= errorMessage %></div>
+              <% } %>
+            </div>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                  <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-            <form action="/signup" method="POST">
+                    <form action="/signup" method="POST">
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="text" id="username" name="username" class="form-control form-control-lg" />
-                  <label class="form-label" for="username">User Name</label>
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="text" id="username" name="username" class="form-control form-control-lg" />
+                        <label class="form-label" for="username">User Name</label>
+                      </div>
+
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                        <label class="form-label" for="email">Your Email</label>
+                      </div>
+
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                        <label class="form-label" for="password">Password</label>
+                      </div>
+
+                      <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                          class="form-control form-control-lg" />
+                        <label class="form-label" for="confirmPassword">Repeat your password</label>
+                      </div>
+
+                      <div class="d-flex justify-content-center">
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Register</button>
+                      </div>
+                    </form>
+
+                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
+                        class="fw-bold text-body"><u>Login here</u></a></p>
+
+
+                  </div>
                 </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="email" name="email" class="form-control form-control-lg" />
-                  <label class="form-label" for="email">Your Email</label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="password" name="password" class="form-control form-control-lg" />
-                  <label class="form-label" for="password">Password</label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-control-lg" />
-                  <label class="form-label" for="confirmPassword">Repeat your password</label>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <button  type="submit" data-mdb-button-init
-                    data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Register</button>
-                </div>
-            </form>
-
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
-
-
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-<%- include('../includes/end.ejs') %>
+      <%- include('../includes/end.ejs') %>

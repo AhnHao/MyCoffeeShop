@@ -3,14 +3,18 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
+const flash = require('connect-flash')
 const connectDB = require('./config/database')
+const PORT = process.env.PORT || 3000
+
+require('dotenv').config()
 
 const User = require('./models/user')
 const errorController = require('./controllers/error')
 
 const app = express()
 const store = new MongoDBStore({
-  uri: 'mongodb+srv://hao:Anhhao08MG@cluster0.ud84vso.mongodb.net/coffeeShop?retryWrites=true&w=majority&appName=Cluster0',
+  uri: process.env.MONGODB_URI,
   collection: 'session'
 })
 
@@ -29,6 +33,7 @@ app.use(session({
   saveUninitialized: false,
   store: store
 }))
+app.use(flash())
 
 app.use((req, res, next) => {
   if(!req.session.user) {
@@ -54,8 +59,6 @@ app.use(authRoutes)
 app.use(errorController.get404)
 
 connectDB()
-
-const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
