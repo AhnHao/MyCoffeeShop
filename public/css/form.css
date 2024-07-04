@@ -1,0 +1,22 @@
+.login_background {
+    background-image: url('/images/login_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.signup_background {
+    background-image: url('/images/signup_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.form-action {
+    width: 430px;
+    background-color: rgba(51, 26, 21, 0.7);
+    border: 1px solid #fff;
+    border-radius: 3px;
+}

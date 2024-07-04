@@ -62,7 +62,7 @@ html {
 
 .user-message {
   margin: auto;
-  width: 70%;
+  width: 45% !important;
   border: 1px solid #4771fa;
   padding: 0.5rem;
   border-radius: 3px;
@@ -74,4 +74,9 @@ html {
   border-color: red;
   background: rgb(255, 176, 176);
   color: red;
+}
+
+.form-control.invalid,
+.form-control.invalid {
+  border: 2px solid red;
 }

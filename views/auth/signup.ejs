@@ -1,61 +1,44 @@
 <%- include('../includes/head.ejs') %>
-  </head>
+  <link rel="stylesheet" href="/css/form.css">
+</head>
 
-  <body>
+<body>
     <%- include('../includes/navigation.ejs') %>
-      <section class="vh-100 my-5 bg-image" style="background-image: url('');">
-        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-          <div class="container h-100">
-            <div class="row mb-3">
-              <% if (errorMessage) { %>
-                <div class="user-message user-message--error"><%= errorMessage %></div>
-              <% } %>
-            </div>
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div class="card" style="border-radius: 15px;">
-                  <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
-                    <form action="/signup" method="POST">
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="text" id="username" name="username" class="form-control form-control-lg" />
-                        <label class="form-label" for="username">User Name</label>
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" id="email" name="email" class="form-control form-control-lg" />
-                        <label class="form-label" for="email">Your Email</label>
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="password" id="password" name="password" class="form-control form-control-lg" />
-                        <label class="form-label" for="password">Password</label>
-                      </div>
-
-                      <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="password" id="confirmPassword" name="confirmPassword"
-                          class="form-control form-control-lg" />
-                        <label class="form-label" for="confirmPassword">Repeat your password</label>
-                      </div>
-
-                      <div class="d-flex justify-content-center">
-                        <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                          class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Register</button>
-                      </div>
-                    </form>
-
-                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                        class="fw-bold text-body"><u>Login here</u></a></p>
-
-
-                  </div>
+    <main class="main signup_background">
+      <div class="container">
+       <div class="row">
+         <% if(errorMessage) { %>
+           <div class="user-message user-message--error mt-3"><%= errorMessage %></div>
+         <% } %>
+       </div>
+         <div class="row">
+           <div class="d-flex justify-content-center">
+             <div class="form-action mt-3">
+               <div class="text-center py-2">
+                 <h1 class="title">Register</h1>
+                 <p class="text-white">Please enter your username, email and password</p>
+               </div>
+               <form action="/signup" method="POST" class="d-flex flex-column justify-content-center" novalidate>
+                <div class="mb-3 px-3">
+                  <label for="username" class="form-label text-white">Username</label>
+                  <input type="text" class="form-control <%= validationErrors.find(e => e.path === 'username') ? 'invalid' : '' %>" name="username" id="username" placeholder="Johan" value="<%= oldInput.username %>">
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <%- include('../includes/end.ejs') %>
+                 <div class="mb-3 px-3">
+                   <label for="email" class="form-label text-white">Email address</label>
+                   <input type="email" class="form-control <%= validationErrors.find(e => e.path === 'email') ? 'invalid' : '' %>" name="email" id="email" placeholder="anteiku@coffee.com" value="<%= oldInput.email %>">
+                 </div>
+                 <div class="mb-3 px-3">
+                   <label for="password" class="form-label text-white">Password</label>
+                   <input type="password" class="form-control <%= validationErrors.find(e => e.path === 'password') ? 'invalid' : '' %>" name="password" id="password" placeholder="Passwords must be at least 6 characters" value="<%= oldInput.password %>">
+                 </div>
+                 <div class="mb-3 px-3">
+                  <label for="confirmPassword" class="form-label text-white">confirmPassword</label>
+                  <input type="password" class="form-control <%= validationErrors.find(e => e.path === 'confirmPassword') ? 'invalid' : '' %>" name="confirmPassword" id="confirmPassword" placeholder="Please re-enter the password above" value="<%= oldInput.confirmPassword %>">
+                </div>
+                 <button type="submit" class="my_btn border text-white my-3 align-self-center">Register</button>
+               </form>
+         </div>
+           </div>
+      </div>
+ </main>
+<%- include('../includes/end.ejs') %>
