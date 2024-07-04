@@ -3,62 +3,64 @@
 </head>
     <body>
         <%- include('../includes/navigation.ejs') %>
-        <main class="main">
-            <div class="container mt-5">
+        <main class="main cart_background">
+            <div class="container my-5">
                 <% if(products.length > 0) {%>
-                <h1 class="mb-4">Your Cart</h1>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr class="text-center">
-                                <th scope="col">Image</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                        </thead>
-                        <% let total = 0 %>
-                        <tbody>
-                            <% products.forEach(p => { %>
-                            <tr class="text-center align-middle">
-                                <td>
-                                    <img src="<%= p.productId.imageUrl %>" alt="<%= p.productId.title %>" class="img-fluid rounded border border-black" style="width: 100px;">
-                                </td>
-                                <td>
-                                    <%= p.productId.title %>
-                                </td>
-                                <td>
-                                    <%= p.productId.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
-                                </td>
-                                <td>
-                                    <%= p.quantity %>
-                                </td>
-                                <td>
-                                    <%= (p.quantity * p.productId.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
-                                </td>
-                                <% total = total + p.quantity * p.productId.price %>
-                                <td>
-                                    <form action="/cart-delete-product" method="POST">
-                                        <input type="hidden" name="productId" value="<%= p.productId._id %>">
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
+                <h1 class="my-5 text-center title">Your Cart</h1>
+                <div class="cart-table">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <% let total = 0 %>
+                            <tbody>
+                                <% products.forEach(p => { %>
+                                <tr class="text-center align-middle">
+                                    <td>
+                                        <img src="<%= p.productId.imageUrl %>" alt="<%= p.productId.title %>" class="img-fluid rounded border border-black" style="width: 100px;">
+                                    </td>
+                                    <td>
+                                        <%= p.productId.title %>
+                                    </td>
+                                    <td>
+                                        <%= p.productId.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
+                                    </td>
+                                    <td>
+                                        <%= p.quantity %>
+                                    </td>
+                                    <td>
+                                        <%= (p.quantity * p.productId.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
+                                    </td>
+                                    <% total = total + p.quantity * p.productId.price %>
+                                    <td>
+                                        <form action="/cart-delete-product" method="POST">
+                                            <input type="hidden" name="productId" value="<%= p.productId._id %>">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <h4>Total Payment: <%= total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %> </h4>
+                    <h4 class="text-white title">Total Payment: <%= total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %> </h4>
                     <form action="/create-order" method="POST">
                         <input type="hidden" name="totalPayment" value="<%= total %>">
-                        <button class="btn btn-success btn-lg" type="submit">Orders</button>
+                        <button class="border text-white my_btn" type="submit">Orders</button>
                     </form>
                 </div>
                 <% } else {%>
-                    <h1 class="d-flex justify-content-center align-items-center mt-5">No Products in cart</h1>
+                    <h1 class="text-center text-white title pt-5">No Products in cart</h1>
                 <% } %> 
             </div>
         </main>

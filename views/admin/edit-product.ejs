@@ -3,7 +3,7 @@
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <main class="main">
+    <main class="main nav_space">
         <div class="container">
             <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
                 <div class="mb-3">

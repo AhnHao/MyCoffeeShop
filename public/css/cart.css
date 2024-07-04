@@ -1,0 +1,11 @@
+.cart_background {
+    background-image: url('/images/cart_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.cart-table {
+    border-radius: 3px;
+}

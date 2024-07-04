@@ -6,16 +6,58 @@
 
 html {
   font-family: Arial, Helvetica, sans-serif;
-  box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
-.product-img {
-  height: 180px;
+:root {
+  --main-color: #331a15;
+  --navbar-height: 84.35px
+}
+
+.main {
+  margin-top: var(--navbar-height);
+}
+
+.navbar_config {
+  background-color: var(--main-color); 
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 16px;
+  font-weight: 700;
+  z-index: 10000 !important;
+}
+
+.nav-item:hover {
+  opacity: 0.7;
+}
+
+.nav-item form .btn:hover {
+  background-color: #4f1016;
+}
+
+.title{
+  color: #F5DEB3;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .img-logo {
   width: 120px;
+}
+
+.my_btn {
+  width: 170px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.my_btn:hover {
+  background-color: #331a15;
 }
 
 .user-message {

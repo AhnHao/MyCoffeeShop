@@ -1,17 +1,17 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/order.css">
-    </head>
+</head>
 
     <body>
         <%- include('../includes/navigation.ejs') %>
-            <main class="main">
+            <main class="main orders_background">
                 <div class="container">
                     <% if(orders.length <= 0) { %>
-                        <h1 class="d-flex d-flex justify-content-center align-items-center mt-5">Nothing here!</h1>
+                        <h1 class="text-center title pt-5 text-white h-100">Nothing here!</h1>
                         <% } else { %>
                             <% orders.forEach(order=> { %>
                                 <% let totalPayment = 0 %>
-                                <section class="h-100 gradient-custom">
+                                <section class="h-100">
                                     <div class="container py-5 h-100">
                                         <div class="row d-flex justify-content-center align-items-center h-100">
                                             <div class="col-lg-10 col-xl-8">
@@ -76,14 +76,16 @@
                                                             <% }) %>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer py-5"
+                                                    <div class="card-footer py-2"
                                                         style="background-color: #331a15;">
-                                                        <h5
-                                                            class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
-                                                            Total
-                                                            paid: <span class="h2 mb-0 ms-2">
-                                                                <%= totalPayment.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %>
-                                                            </span></h5>
+                                                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                                            <div>
+                                                                Total Paid:
+                                                                <span class="h2 mb-0 ms-2">
+                                                                    <%= totalPayment.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %>
+                                                                </span> 
+                                                            </div>
+                                                        </h5>
                                                     </div>
                                                 </div>
                                             </div>

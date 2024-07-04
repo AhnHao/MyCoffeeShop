@@ -1,0 +1,13 @@
+.orders_background {
+    background-image: url('/images/orders_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.orders_text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}

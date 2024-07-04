@@ -3,58 +3,25 @@
 </head>
     <body>
         <%- include('../includes/navigation.ejs') %>
-        <main class="main">
-            <div class="container">
-                <div class="banner">
-                    <div class="row">
-                        <div class="col-8">
-                            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active">
-                                    <img src="https://wallpapercave.com/wp/wp8508184.jpg" class="d-block w-100 rounded" alt="Home">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="https://wallpapers.com/images/hd/anteiku-1920-x-1080-wallpaper-dxavre36i2uejsnk.jpg" class="d-block w-100 rounded" alt="Home">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="https://wallpapers.com/images/hd/anteiku-1920-x-1080-wallpaper-6avuhshg9hii20pn.jpg" class="d-block w-100 rounded" alt="Home">
-                                  </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                  <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                                <div class="right-banner d-flex flex-column align-items-start mb-3" style="height: 100%;">
-                                    <img src="https://pbs.twimg.com/media/FGleagLVUAEUkj9.jpg" class="img-fluid mb-auto rounded" alt="Logo">
-                                    <img src="https://cdn.tgdd.vn/Files/2023/07/11/1537842/espresso-la-gi-nguyen-tac-pha-espresso-dung-chuan-202307120715077669.jpg" class="img-fluid rounded" alt="coffee">
-                                </div>
+        <main class="main home__background">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="desc mt-5 d-flex flex-column  justify-content-center">
+                            <h4 class="title mb-3">Welcome to Anteiku</h4>
+                            <h1 class="my-2">Keep your dreams aroused with a cup of coffee.</h1>
+                            <p class="my-5">The coffee ideas shared by these generators are not
+                                cool at all, as they are not a human being.</p>
+                            <form action="/menu" method="GET">
+                                <button type="submit" class="my_btn text-white border">Order Now!</button>
+                            </form>
+                            <p class="mt-5">Contact Us<br>
+                                Phone: 036****286 <br>
+                                Email: anteiku@coffee.com
+                            </p>
                         </div>
                     </div>
                 </div>
-                <% if(prods.length > 0) {%>
-                <div class="row gx-5 mt-5">
-                    <% for(let product of prods) {%>
-                        <div class="col p-3">
-                            <div class="card border border-dark-subtle position-relative" style="width: 15rem; height: 25rem;">
-                                <img src="<%= product.imageUrl %>" class="card-img-top product-img" alt="<%= product.title %>">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= product.title %></h5>
-                                    <h2 class="card-title"><%= product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %></h2>
-                                    <p class="card-text"><%= product.description %></p>
-                                    <a href="/menu/<%= product._id %>" class="btn btn-primary position-absolute" style="bottom: 1rem;">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                    <% } %>
-                </div>
-                <% } %>
             </div>
         </main>
 <%- include('../includes/end.ejs') %>

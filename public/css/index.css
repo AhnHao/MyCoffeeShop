@@ -1,0 +1,22 @@
+.home__background {
+    background-image: url('/images/homepage_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.desc {
+    height: 100%;
+    user-select: none;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.desc h1 {
+    color: #fff;
+}
+
+.desc p {
+    color: #fff;
+    font-size: 18px;
+}
