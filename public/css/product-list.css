@@ -3,7 +3,21 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    width: 100%;
     height: calc(100vh - var(--navbar-height));
+    position: fixed;
+    z-index: -1000;
+}
+
+.admin_background {
+    background-image: url('/images/admin_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    position: fixed;
+    z-index: -1000;
 }
 
 .product-item {

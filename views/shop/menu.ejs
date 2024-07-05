@@ -1,9 +1,10 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/product-list.css">
 </head>
     <body>
         <%- include('../includes/navigation.ejs') %>
-        <main class="main menu_background">
+        <main class="main">
+            <div class="menu_background"></div>
             <% if(products.length > 0) { %>
                 <div class="container">
                     <div class="row mb-3">
@@ -14,7 +15,7 @@
                     <div class="row">
                         <% products.forEach(product => { %>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <div class="product-item mt-3">
+                                <div class="product-item my-3">
                                     <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="product-item_img w-100">
                                     <div class="px-3">
                                         <h4 class="product-item__name my-2"><%= product.title %></h4>
