@@ -12,34 +12,34 @@
               <div class="user-message user-message--error mt-3"><%= errorMessage %></div>
             <% } %>
           </div>
-            <div class="row">
-              <div class="d-flex justify-content-center">
-                <div class="form-action mt-3">
-                  <div class="text-center py-3 my-2">
-                    <h1 class="title">Login</h1>
-                    <p class="text-white">Please enter your email and password</p>
+          <div class="row">
+            <div class="d-flex justify-content-center">
+              <div class="form-action mt-3">
+                <div class="text-center py-3 my-2">
+                  <h1 class="title">Login</h1>
+                  <p class="text-white">Please enter your email and password</p>
+                </div>
+                <form action="/login" method="POST" class="d-flex flex-column justify-content-center" novalidate>
+                  <div class="mb-4 px-4">
+                    <label for="email" class="form-label text-white">Email address</label>
+                    <input type="email" class="form-control <%= validationErrors.find(e => e.path === 'email') ? 'invalid' : '' %>" name="email" id="email" placeholder="anteiku@coffee.com" value="<%= oldInput.email %>">
                   </div>
-                  <form action="/login" method="POST" class="d-flex flex-column justify-content-center" novalidate>
-                    <div class="mb-4 px-4">
-                      <label for="email" class="form-label text-white">Email address</label>
-                      <input type="email" class="form-control <%= validationErrors.find(e => e.path === 'email') ? 'invalid' : '' %>" name="email" id="email" placeholder="anteiku@coffee.com" value="<%= oldInput.email %>">
-                    </div>
-                    <div class="mb-4 px-4">
-                      <label for="password" class="form-label text-white">Password</label>
-                      <input type="password" class="form-control <%= validationErrors.find(e => e.path === 'password') ? 'invalid' : '' %>" name="password" id="password" placeholder="Passwords must be at least 6 characters" value="<%= oldInput.password %>">
-                    </div>
-                    <div class="mb-4 text-center">
-                        <a href="/reset" class="text-warning link-underline link-underline-opacity-0">Forgot your password?</a>
-                    </div>
-                    <button type="submit" class="my_btn border text-white mb-4 align-self-center">Login</button>
-                  </form>
+                  <div class="mb-4 px-4">
+                    <label for="password" class="form-label text-white">Password</label>
+                    <input type="password" class="form-control <%= validationErrors.find(e => e.path === 'password') ? 'invalid' : '' %>" name="password" id="password" placeholder="Passwords must be at least 6 characters" value="<%= oldInput.password %>">
+                  </div>
+                  <div class="mb-4 text-center">
+                      <a href="/reset" class="text-warning link-underline link-underline-opacity-0">Forgot your password?</a>
+                  </div>
+                  <button type="submit" class="my_btn border text-white mb-4 align-self-center">Login</button>
+                </form>
 
-                  <div class="text-center text-white">
-                    <p>Don't have an account? <a href="/signup" class="text-warning link-underline link-underline-opacity-0 ">Register</a></p>
-                  </div>
+                <div class="text-center text-white">
+                  <p>Don't have an account? <a href="/signup" class="text-warning link-underline link-underline-opacity-0 ">Register</a></p>
                 </div>
               </div>
             </div>
-         </div>
+          </div>
+        </div>
     </main>
 <%- include('../includes/end.ejs') %>

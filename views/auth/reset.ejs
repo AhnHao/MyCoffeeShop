@@ -1,24 +1,32 @@
 <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/form.css">
 </head>
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <main>
-        <div class="container mt-3">
+    <main class="main">
+        <div class="login_background"></div>
+        <div class="container">
             <div class="row">
                 <% if(errorMessage) { %>
-                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <div class="user-message user-message--error mt-3"><%= errorMessage %></div>
                 <% } %>
             </div>
             <div class="row">
-                <form action="/reset" method="POST">
-                    <div class="mb-3">
-                      <label for="email" class="form-label">Email address</label>
-                      <input type="email" class="form-control" name="email" id="email" placeholder="example@coffee.com">
+                <div class="d-flex justify-content-center">
+                  <div class="form-action mt-3">
+                    <div class="text-center py-3 my-2">
+                      <h1 class="title">Reset Password</h1>
                     </div>
-        
-                    <button type="submit" class="btn btn-primary">Reset Password</button>
-                </form>
+                    <form action="/reset" method="POST" class="d-flex flex-column justify-content-center" novalidate>
+                      <div class="mb-4 px-4">
+                        <label for="email" class="form-label text-white">Email address</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="anteiku@coffee.com">
+                      </div>
+                      <button type="submit" class="my_btn border text-white mb-4 align-self-center">Receive Email</button>
+                    </form>
+                  </div>
+                </div>
             </div>
         </div>
     </main>
