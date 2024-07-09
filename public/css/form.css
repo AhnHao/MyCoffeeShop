@@ -1,5 +1,5 @@
 .login_background {
-    background-image: url('/images/login_background.jpg');
+    background-image: url('/public/images/main-images/login_background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -10,7 +10,7 @@
 }
 
 .signup_background {
-    background-image: url('/images/signup_background.jpg');
+    background-image: url('/public/images/main-images/signup_background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -21,7 +21,7 @@
 }
 
 .addProduct_background {
-    background-image: url('/images/addProduct_background.jpg');
+    background-image: url('/public/images/main-images/addProduct_background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

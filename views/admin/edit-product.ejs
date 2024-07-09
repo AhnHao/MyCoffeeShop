@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/public/css/form.css">
 </head>
 
 <body>
@@ -18,14 +18,14 @@
                         <div class="text-center py-2 my-2">
                             <h1 class="title">Add New Product</h1>
                         </div>
-                        <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" class="d-flex flex-column justify-content-center" novalidate>
+                        <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" class="d-flex flex-column justify-content-center" enctype="multipart/form-data">
                         <div class="mb-2 px-2">
                             <label for="title" class="form-label text-white">Title</label>
                             <input type="text" class="form-control <%= validationErrors.find(e => e.path === 'title') ? 'invalid' : '' %>" name="title" id="title" value="<% if(editing || hasError) { %><%= product.title %><% } %>">
                         </div>
                         <div class="mb-2 px-2">
-                            <label for="imageUrl" class="form-label text-white">Image Url</label>
-                            <input type="text" class="form-control <%= validationErrors.find(e => e.path === 'imageUrl') ? 'invalid' : '' %>" name="imageUrl" id="imageUrl" value="<% if(editing || hasError) { %><%= product.imageUrl %><% } %>">
+                            <label for="image" class="form-label text-white">Image</label>
+                            <input type="file" class="form-control" name="image" id="image">
                         </div>
                         <div class="mb-2 px-2">
                             <label for="price" class="form-label text-white">Price</label>

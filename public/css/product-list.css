@@ -1,5 +1,5 @@
 .menu_background {
-    background-image: url('/images/menu_background.jpg');
+    background-image: url('/public/images/main-images/menu_background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -10,7 +10,7 @@
 }
 
 .admin_background {
-    background-image: url('/images/admin_background.jpg');
+    background-image: url('/public/images/main-images/admin_background.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -49,4 +49,19 @@
 
 .card-action .btn:hover {
     background-color: #4f1016;
+}
+
+.desc,
+.desc h1,
+.desc h3 {
+    color: #fff;
+    padding-left: 8px;
+    font-weight: 700;
+    user-select: none;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.desc p {
+    padding-left: 8px;
+    font-size: 24px;
 }
