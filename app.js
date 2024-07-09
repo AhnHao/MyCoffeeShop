@@ -49,6 +49,7 @@ app.set('views', 'views')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const authRoutes = require('./routes/auth')
+const { error } = require('console')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/public',express.static(path.join(__dirname, 'public')))
@@ -84,7 +85,16 @@ app.use('/admin', adminRoutes)
 app.use(shopRoutes)
 app.use(authRoutes)
 
+app.use('/500', errorController.get505)
 app.use(errorController.get404)
+
+app.use((error, req, res, next) => {
+  res.status(500).render('500', {
+    pageTitle: 'Error',
+    path: '/500',
+    isAuthenticated: req.session.isLoggedIn
+  })
+})
 
 connectDB()
 
