@@ -56,8 +56,7 @@
                 <div class="d-flex justify-content-between">
                     <h4 class="text-white title">Total Payment: <%= total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %> </h4>
                     <form action="/create-order" method="POST">
-                        <input type="hidden" name="totalPayment" value="<%= total %>">
-                        <button class="border text-white my_btn" type="submit">Orders</button>
+                        <button class="border text-white my_btn" type="submit">Order</button>
                     </form>
                 </div>
                 <% } else {%>

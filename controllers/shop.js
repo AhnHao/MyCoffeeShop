@@ -1,5 +1,6 @@
 const Product = require('../models/product')
 const Order = require('../models/order')
+require('dotenv').config()
 
 exports.getIndex = (req, res) => {
   Product.find()
