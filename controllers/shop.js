@@ -1,5 +1,6 @@
 const Product = require('../models/product')
 const Order = require('../models/order')
+const stripe = require('stripe')('sk_test_51PazcWRvMrbJ0lnL8sjDxKtwxihMI8wTQLA5VLlD87SfRI1uxqbcnfEV6sM3TxwiOE7AmJoj4D66lK6BsZhFExgn00NrSgyYJu')
 require('dotenv').config()
 
 exports.getIndex = (req, res) => {
@@ -96,6 +97,56 @@ exports.postCartDeleteProduct = (req, res) => {
     })
 }
 
+exports.getCheckout = (req, res, next) => {
+  let products
+  let total = 0
+
+  req.user
+    .populate('cart.items.productId')
+    .then(user => {
+      products = user.cart.items
+      total = 0
+      products.forEach(p => {
+        total += p.quantity * p.productId.price
+      })
+
+      return stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        line_items: products.map(p => {
+          return {
+            quantity: p.quantity,
+            price_data: {
+              currency: 'vnd',
+              unit_amount: p.productId.price,
+              product_data: {
+                name: p.productId.title,
+                description: p.productId.description
+              }
+            }
+          }
+        }),
+        customer_email: req.user.email,
+        success_url: req.protocol + '://' + req.get('host') + '/checkout/success',
+        cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
+      })
+    })
+    .then(session => {
+      res.render('shop/checkout', {
+        path: '/checkout',
+        pageTitle: 'Checkout',
+        products: products,
+        totalSum: total,
+        sessionId: session.id
+      })
+    })
+    .catch(err => {
+      const error = new Error(err)
+      error.httpStatusCode = 500
+      return next(err)
+    })
+}
+
 exports.getOrder = (req, res) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
@@ -112,7 +163,7 @@ exports.getOrder = (req, res) => {
     })
 }
 
-exports.postOrder = (req, res) => {
+exports.getCheckoutSuccess = (req, res) => {
   req.user
     .populate('cart.items.productId')
     .then(user => {

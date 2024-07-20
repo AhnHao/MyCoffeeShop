@@ -1,0 +1,113 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="main">
+        <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/public/css/order.css">
+</head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main class="main">
+                <div class="orders_background"></div>
+                <div class="container">
+                    <section class="h-100">
+                        <div class="container pt-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col-lg-10 col-xl-8">
+                                    <div class="card border border-black">
+                                        <div class="card-header py-4"
+                                                        style="background-color: #331a15;">
+                                                        <h5 class="mb-0 text-white">Confirm your order!</h5>
+                                                    </div>
+                                        <div class="card-body border border-black p-4" style="background-color: #e0e0e0;">
+                                            <div
+                                                class="d-flex justify-content-between align-items-center mb-4">
+                                                <p class="lead fw-normal mb-0" style="color: #331a15;">
+                                                    receipt</p>
+                                            </div>
+                                            <div class="card shadow-0 mb-4">
+                                                <% products.forEach(p=> { %>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <img src="/<%= p.productId.imageUrl %>"
+                                                                    class="img-fluid rounded border border-black"
+                                                                    alt="<%= p.productId.title %>">
+                                                            </div>
+                                                            <div
+                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0">
+                                                                    <%= p.productId.title %>
+                                                                </p>
+                                                            </div>
+                                                            <div
+                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0 small">
+                                                                    <%= p.productId.price.toLocaleString('vi-VN',
+                                                                        { style: 'currency' ,
+                                                                        currency: 'VND' }) %>
+                                                                </p>
+                                                            </div>
+                                                            <div
+                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0 small">Size: L</p>
+                                                            </div>
+                                                            <div
+                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0 small">Qty: <%=
+                                                                        p.quantity %>
+                                                                </p>
+                                                            </div>
+                                                            <div
+                                                                class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <p class="text-muted mb-0 small">
+                                                                    Total: <%= (p.productId.price *
+                                                                        p.quantity).toLocaleString('vi-VN',
+                                                                        { style: 'currency' ,
+                                                                        currency: 'VND' }) %>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <hr style="background-color: #e0e0e0; opacity: 1;">
+                                                    </div>
+                                                <% }) %>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer py-4"
+                                            style="background-color: #331a15;">
+                                            <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                                <div>
+                                                    Total Paid:
+                                                    <span class="h2 mb-0 ms-2">
+                                                        <%= totalSum.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %>
+                                                    </span> 
+                                                </div>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="d-flex justify-content-center py-3">
+                        <button id="pay-btn" class="text-white border my_btn">PAY NOW</button>
+                        <script src="https://js.stripe.com/v3/"></script>
+                        <script>
+                            var stripe = Stripe('pk_test_51PazcWRvMrbJ0lnLqgd5xY6K0hdXPwkYHfaef5wuT0O4a5lcwGIrDYP9pU5tQIV9r2tWGBXQp95O1v6CPOo4DyEV00tx2exboa')
+                            var payBtn = document.getElementById('pay-btn')
+                            payBtn.addEventListener('click', function() {
+                                stripe.redirectToCheckout({
+                                    sessionId: '<%= sessionId %>'
+                                })
+                            })
+                        </script>
+                    </div>
+                </div>
+            </main>
+            <%- include('../includes/end.ejs') %>
+    </main>
+
+<%- include('../includes/end.ejs') %>

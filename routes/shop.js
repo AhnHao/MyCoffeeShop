@@ -17,8 +17,13 @@ router.post('/cart', isAuth, shopController.postCart)
 
 router.post('/cart-delete-product', isAuth, shopController.postCartDeleteProduct)
 
+router.get('/checkout', isAuth, shopController.getCheckout)
+
+router.get('/checkout/success', isAuth, shopController.getCheckoutSuccess)
+
+router.get('/checkout/cancel', shopController.getCheckout)
+
 router.get('/orders', isAuth, shopController.getOrder)
 
-router.post('/create-order', isAuth, shopController.postOrder)
 
 module.exports = router
