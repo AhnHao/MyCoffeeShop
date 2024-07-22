@@ -72,6 +72,7 @@ exports.postLogin = (req, res) => {
           if (doMatch) {
             req.session.isLoggedIn = true
             req.session.user = user
+            req.session.isAdmin = user.isAdmin
             return req.session.save(err => {
               console.log(err)
               res.redirect('/')
