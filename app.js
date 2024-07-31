@@ -6,9 +6,10 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
 const connectDB = require('./config/database')
 const multer = require('multer')
-const PORT = process.env.PORT || 3000
 
 require('dotenv').config()
+
+const PORT = process.env.PORT
 
 const User = require('./models/user')
 const errorController = require('./controllers/error')
@@ -32,14 +33,14 @@ const fileStorage = multer.diskStorage({
 })
 
 const fileFilter = (req, file, cb) => {
-  const filetypes = /jpeg|jpg|png|jfif/;
-  const mimetype = filetypes.test(file.mimetype);
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  const filetypes = /jpeg|jpg|png|jfif/
+  const mimetype = filetypes.test(file.mimetype)
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
 
   if (mimetype && extname) {
-    return cb(null, true);
+    return cb(null, true)
   } else {
-    cb('Error: image is wrong format');
+    cb('Error: image is wrong format')
   }
 }
 
@@ -51,8 +52,10 @@ const shopRoutes = require('./routes/shop')
 const authRoutes = require('./routes/auth')
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/public',express.static(path.join(__dirname, 'public')))
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('image'))
+app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+)
 app.use(
   session({
     secret: 'my secret',
