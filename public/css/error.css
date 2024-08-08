@@ -1,5 +1,5 @@
 .not_found_background {
-  background-image: url('');
+  background-image: url('/public/images/main-images/error_background.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
