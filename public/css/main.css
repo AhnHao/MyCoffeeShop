@@ -37,6 +37,10 @@ html {
   background-color: #4f1016;
 }
 
+.text-shadow {
+  text-shadow: 2px 2px 4px #000000;
+}
+
 .title{
   color: #F5DEB3;
   text-transform: uppercase;
