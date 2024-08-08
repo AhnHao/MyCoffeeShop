@@ -9,7 +9,7 @@ const multer = require('multer')
 
 require('dotenv').config()
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 const User = require('./models/user')
 const errorController = require('./controllers/error')
