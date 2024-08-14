@@ -31,14 +31,17 @@
     color: #fff;
 }
 
+.product-item__desc {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .product-item_img {
     height: 60%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-}
-
-.detail-img {
-    
 }
 
 .card-action {
@@ -68,4 +71,7 @@
 .desc p {
     padding-left: 8px;
     font-size: 24px;
+    font-weight: 400;
+    user-select: none;
+    text-shadow: 2px 2px 4px #000000;
 }

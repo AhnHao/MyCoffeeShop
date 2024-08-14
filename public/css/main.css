@@ -9,6 +9,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #fff;
+}
+
 :root {
   --main-color: #331a15;
   --navbar-height: 84.35px
@@ -26,6 +30,7 @@ html {
   right: 0;
   font-size: 16px;
   font-weight: 700;
+  border-bottom: 2px solid #000000;
   z-index: 10000 !important;
 }
 
@@ -83,4 +88,23 @@ html {
 .form-control.invalid,
 .form-control.invalid {
   border: 2px solid red;
+}
+
+.active>.page-link {
+  background-color: #4f1016 !important;
+  border-color: #fff !important;
+}
+
+.page-link {
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  font-size: 18px !important;
+}
+
+.page-link:hover {
+  background-color: #4f1016 !important;
+}
+
+.page-link:focus {
+  box-shadow: 0 0 0 0.25rem rgba(51, 26, 21, 0.4) !important;
 }

@@ -35,6 +35,9 @@
                             </div>
                         <% }) %>
                     </div>
+                    <div class="row my-3">
+                        <%- include('../includes/pagination.ejs', {currentPage: currentPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage }) %>
+                    </div>
                  </div>
             <% } else { %>
                 <h1 class="pt-5 title text-center">No products here!</h1>

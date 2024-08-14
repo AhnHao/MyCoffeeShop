@@ -4,6 +4,8 @@ require('dotenv').config()
 
 const stripe = require('stripe')(process.env.SECRET_KEY)
 
+const ITEMS_PER_PAGE = 8
+
 exports.getIndex = (req, res) => {
   Product.find()
     .then(products => {
@@ -21,12 +23,28 @@ exports.getIndex = (req, res) => {
 }
 
 exports.getMenu = (req, res) => {
+  const page = +req.query.page || 1
+  let totalItems
+
   Product.find()
+    .countDocuments()
+    .then(numProducts => {
+      totalItems = numProducts
+      return Product.find()
+        .skip((page-1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE)
+    })
     .then(products => {
       res.render('shop/menu', {
         products: products,
         pageTitle: 'Menu',
-        path: '/menu'
+        path: '/menu',
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
       })
     })
     .catch(err => {
@@ -78,7 +96,6 @@ exports.postCart = (req, res) => {
       return req.user.addToCart(product)
     })
     .then(result => {
-      console.log(result)
       res.redirect('/cart')
     })
 }
@@ -88,7 +105,6 @@ exports.postCartDeleteProduct = (req, res) => {
   req.user
     .removeFromCart(prodId)
     .then(result => {
-      console.log(result)
       res.redirect('/cart')
     })
     .catch(err => {
