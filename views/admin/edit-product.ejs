@@ -21,7 +21,7 @@
                         <form action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST" class="d-flex flex-column justify-content-center" enctype="multipart/form-data">
                         <div class="mb-2 px-2">
                             <label for="title" class="form-label text-white">Title</label>
-                            <input type="text" class="form-control <%= validationErrors.find(e => e.path === 'title') ? 'invalid' : '' %>" name="title" id="title" value="<% if(editing || hasError) { %><%= product.title %><% } %>">
+                            <input type="text" placeholder="Enter product name" class="form-control <%= validationErrors.find(e => e.path === 'title') ? 'invalid' : '' %>" name="title" id="title" value="<% if(editing || hasError) { %><%= product.title %><% } %>">
                         </div>
                         <div class="mb-2 px-2">
                             <label for="image" class="form-label text-white">Image</label>
@@ -29,11 +29,11 @@
                         </div>
                         <div class="mb-2 px-2">
                             <label for="price" class="form-label text-white">Price</label>
-                            <input type="number" min="0" class="form-control <%= validationErrors.find(e => e.path === 'price') ? 'invalid' : '' %>" name="price" id="price" value="<% if(editing || hasError) { %><%= product.price %><% } %>">
+                            <input type="number" min="0" placeholder="Enter product price (vnd)" class="form-control <%= validationErrors.find(e => e.path === 'price') ? 'invalid' : '' %>" name="price" id="price" value="<% if(editing || hasError) { %><%= product.price %><% } %>">
                         </div>
                         <div class="mb-2 px-2">
                             <label for="description" class="form-label text-white">Description</label>
-                            <textarea class="form-control <%= validationErrors.find(e => e.path === 'description') ? 'invalid' : '' %>" name="description" id="description" rows="3"><% if(editing || hasError) { %><%= product.description %><% } %></textarea>
+                            <textarea placeholder="Enter product description..." class="form-control <%= validationErrors.find(e => e.path === 'description') ? 'invalid' : '' %>" name="description" id="description" rows="3"><% if(editing || hasError) { %><%= product.description %><% } %></textarea>
                         </div>
                         <% if (editing) { %>
                             <input type="hidden" value="<%= product._id %>" name="productId">

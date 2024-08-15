@@ -25,6 +25,7 @@ exports.getIndex = (req, res) => {
 exports.getMenu = (req, res) => {
   const page = +req.query.page || 1
   let totalItems
+  const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
 
   Product.find()
     .countDocuments()
@@ -39,6 +40,7 @@ exports.getMenu = (req, res) => {
         products: products,
         pageTitle: 'Menu',
         path: '/menu',
+        currentUrl: currentUrl,
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
@@ -56,12 +58,14 @@ exports.getMenu = (req, res) => {
 
 exports.getProduct = (req, res) => {
   const proId = req.params.productId
+  const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
   Product.findById(proId)
     .then(product => {
       res.render('shop/product-detail', {
         product: product,
         pageTitle: product.title,
-        path: '/product-detail'
+        path: '/product-detail',
+        currentUrl: currentUrl
       })
     })
     .catch(err => {
@@ -91,12 +95,14 @@ exports.getCart = (req, res) => {
 
 exports.postCart = (req, res) => {
   const prodId = req.body.productId
+  const currentUrl = req.body.currentUrl
   Product.findById(prodId)
     .then(product => {
       return req.user.addToCart(product)
     })
     .then(result => {
-      res.redirect('/cart')
+      console.log(currentUrl)
+      res.redirect(currentUrl)
     })
 }
 

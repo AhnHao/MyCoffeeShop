@@ -24,7 +24,7 @@
         <% if(lastPage !== currentPage && lastPage !== nextPage) {%>
             <li class="page-item"><a class="page-link p-3" href="?page=<%= lastPage %>"><%= lastPage %></a></li>
         <% } %>
-        <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+        <li class="page-item <%= currentPage === lastPage ? 'disabled' : '' %>">
             <a class="page-link p-3" href="?page=<%= currentPage + 1 %>" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
             </a>

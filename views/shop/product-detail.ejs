@@ -24,6 +24,7 @@
                         <% if(isAuthenticated) { %>
                             <form action="/cart" method="POST" class="ps-5">
                                 <input type="hidden" name="productId" value="<%= product._id %>">
+                                <input type="hidden" name="currentUrl" value="<%= currentUrl %>">
                                 <button class="my_btn border text-white" type="submit">Add To Cart</button>
                             </form>
                         <% } %>
