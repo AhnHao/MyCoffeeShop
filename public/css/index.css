@@ -28,3 +28,39 @@
     user-select: none;
     text-shadow: 2px 2px 4px #000000;
 }
+
+.carousel-caption {
+    position: static;
+    padding: 16px 8px 16px;
+    background-color: transparent;
+    color: #fff;
+    min-height: 125px;
+    width: 85%;
+    user-select: none;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 5%;
+}
+
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+.opening-hours {
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    user-select: none;
+    text-shadow: 2px 2px 4px #000000;
+}
