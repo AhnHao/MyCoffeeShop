@@ -34,7 +34,7 @@ exports.getLogin = (req, res) => {
   })
 }
 
-exports.postLogin = (req, res) => {
+exports.postLogin = (req, res, next) => {
   const email = req.body.email
   const password = req.body.password
 
@@ -123,13 +123,13 @@ exports.getSignup = (req, res) => {
   })
 }
 
-exports.postSignup = (req, res) => {
+exports.postSignup = (req, res, next) => {
   const username = req.body.username
   const email = req.body.email
   const password = req.body.password
   const confirmPassword = req.body.confirmPassword
   const errors = validationResult(req)
-  if(!errors.isEmpty()) {
+  if (!errors.isEmpty()) {
     return res.status(422).render('auth/signup', {
       pageTitle: 'Sign Up',
       path: '/signup',
@@ -191,7 +191,7 @@ exports.getResetPassword = (req, res) => {
   })
 }
 
-exports.postResetPassword = (req, res) => {
+exports.postResetPassword = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
       console.log(err)
@@ -247,10 +247,14 @@ exports.getNewPassword = (req, res) => {
         passwordToken: token
       })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      const error = new Error(err)
+      error.httpStatusCode = 500
+      return next(err)
+    })
 }
 
-exports.postNewPassword = (req, res) => {
+exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.password
   const userId = req.body.userId
   const passwordToken = req.body.passwordToken

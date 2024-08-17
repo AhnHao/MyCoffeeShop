@@ -6,7 +6,7 @@ const stripe = require('stripe')(process.env.SECRET_KEY)
 
 const ITEMS_PER_PAGE = 8
 
-exports.getIndex = (req, res) => {
+exports.getIndex = (req, res, next) => {
   Product.find()
     .then(products => {
       res.render('shop/index', {
@@ -22,7 +22,7 @@ exports.getIndex = (req, res) => {
     })
 }
 
-exports.getMenu = (req, res) => {
+exports.getMenu = (req, res, next) => {
   const page = +req.query.page || 1
   let totalItems
   const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
@@ -32,7 +32,7 @@ exports.getMenu = (req, res) => {
     .then(numProducts => {
       totalItems = numProducts
       return Product.find()
-        .skip((page-1) * ITEMS_PER_PAGE)
+        .skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE)
     })
     .then(products => {
@@ -56,16 +56,26 @@ exports.getMenu = (req, res) => {
     })
 }
 
-exports.getProduct = (req, res) => {
+exports.getProduct = (req, res, next) => {
   const proId = req.params.productId
   const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+  let currentProduct
   Product.findById(proId)
     .then(product => {
+      currentProduct = product
+      const currentProductId = currentProduct._id
+      return Product.aggregate([
+        { $match: { _id: { $ne: currentProductId } } },
+        { $sample: { size: 4 } }
+      ])
+    })
+    .then(randomProducts => {
       res.render('shop/product-detail', {
-        product: product,
-        pageTitle: product.title,
+        product: currentProduct,
+        pageTitle: currentProduct.title,
         path: '/product-detail',
-        currentUrl: currentUrl
+        currentUrl: currentUrl,
+        randomProducts: randomProducts
       })
     })
     .catch(err => {
@@ -75,7 +85,7 @@ exports.getProduct = (req, res) => {
     })
 }
 
-exports.getCart = (req, res) => {
+exports.getCart = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
     .then(user => {
@@ -93,7 +103,7 @@ exports.getCart = (req, res) => {
     })
 }
 
-exports.postCart = (req, res) => {
+exports.postCart = (req, res, next) => {
   const prodId = req.body.productId
   const currentUrl = req.body.currentUrl
   Product.findById(prodId)
@@ -101,12 +111,11 @@ exports.postCart = (req, res) => {
       return req.user.addToCart(product)
     })
     .then(result => {
-      console.log(currentUrl)
       res.redirect(currentUrl)
     })
 }
 
-exports.postCartDeleteProduct = (req, res) => {
+exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId
   req.user
     .removeFromCart(prodId)
@@ -150,7 +159,8 @@ exports.getCheckout = (req, res, next) => {
           }
         }),
         customer_email: req.user.email,
-        success_url: req.protocol + '://' + req.get('host') + '/checkout/success',
+        success_url:
+          req.protocol + '://' + req.get('host') + '/checkout/success',
         cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
       })
     })
@@ -170,7 +180,7 @@ exports.getCheckout = (req, res, next) => {
     })
 }
 
-exports.getOrder = (req, res) => {
+exports.getOrder = (req, res, next) => {
   Order.find({ 'user.userId': req.user._id })
     .then(orders => {
       res.render('shop/orders', {
@@ -186,12 +196,12 @@ exports.getOrder = (req, res) => {
     })
 }
 
-exports.getCheckoutSuccess = (req, res) => {
+exports.getCheckoutSuccess = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
     .then(user => {
       const products = user.cart.items.map(i => {
-        return {quantity: i.quantity, product: {...i.productId._doc}}
+        return { quantity: i.quantity, product: { ...i.productId._doc } }
       })
       const order = new Order({
         products: products,

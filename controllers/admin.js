@@ -15,7 +15,7 @@ exports.getAddProduct = (req, res) => {
   })
 }
 
-exports.postAddProduct = (req, res) => {
+exports.postAddProduct = (req, res, next) => {
   const title = req.body.title
   const image = req.file
   const price = req.body.price
@@ -76,7 +76,7 @@ exports.postAddProduct = (req, res) => {
     })
 }
 
-exports.getProducts = (req, res) => {
+exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1
   let totalItems
 
@@ -108,7 +108,7 @@ exports.getProducts = (req, res) => {
     })
 }
 
-exports.getEditProduct = (req, res) => {
+exports.getEditProduct = (req, res, next) => {
   const editmode = req.query.edit
   if (!editmode) {
     return res.redirect('/')
@@ -135,7 +135,7 @@ exports.getEditProduct = (req, res) => {
     })
 }
 
-exports.postEditProduct = (req, res) => {
+exports.postEditProduct = (req, res, next) => {
   const proId = req.body.productId
   const updatedTitle = req.body.title
   const updatedPrice = req.body.price
@@ -182,7 +182,7 @@ exports.postEditProduct = (req, res) => {
     })
 }
 
-exports.postDeleteProduct = (req, res) => {
+exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId
   Product.findById(prodId)
     .then(product => {

@@ -40,9 +40,9 @@
                 <a class="nav-link px-4 <%= path === '/signup' ? 'text-warning' : 'text-white' %>" href="/signup">Sign Up</a>
             </li>
           <% } else { %>
-            <li class="nav-item">
+            <li class="nav-item logout-item">
               <form action="/logout" method="POST">
-                <button class="btn text-white border" type="submit">Logout</button>
+                <button class="logout_btn text-white border" type="submit">Logout</button>
               </form>
           </li>
           <% } %>

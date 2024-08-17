@@ -29,32 +29,10 @@
     text-shadow: 2px 2px 4px #000000;
 }
 
-.carousel-caption {
-    position: static;
-    padding: 16px 8px 16px;
-    background-color: transparent;
-    color: #fff;
-    min-height: 125px;
-    width: 85%;
-    user-select: none;
-    text-shadow: 2px 2px 4px #000000;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-    width: 5%;
-}
-
-
-.carousel-control-prev {
-    left: 20px;
-}
-
-.carousel-control-next {
-    right: 20px;
+.logo-img {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: -10px 15px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
 }
 
 .opening-hours {

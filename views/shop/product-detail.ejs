@@ -5,7 +5,12 @@
         <%- include('../includes/navigation.ejs') %>
         <main class="main">
             <div class="menu_background"></div>
-            <div class="container py-5 h-100">
+            <div class="container h-100">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                       <h1 class="title text-center mt-3">Detail Coffee</h1>
+                    </div>
+                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <img 
@@ -15,19 +20,48 @@
                             width="500px" height="500px"
                         >
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-flex flex-column justify-content-evenly">
                        <div class="desc">
                             <h1 class="display-5 mb-3"><%= product.title %></h1>
                             <h3 class="mb-3"><%= product.price.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %></h3>
-                            <p class="lead mb-5"><%= product.description %></p>
+                            <p class="lead mb-4"><%= product.description %></p>
                        </div>
                         <% if(isAuthenticated) { %>
-                            <form action="/cart" method="POST" class="ps-5">
+                            <form action="/cart" method="POST" class="ps-4 mb-4">
                                 <input type="hidden" name="productId" value="<%= product._id %>">
                                 <input type="hidden" name="currentUrl" value="<%= currentUrl %>">
                                 <button class="my_btn border text-white" type="submit">Add To Cart</button>
                             </form>
                         <% } %>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-md-12">
+                       <h1 class="title mt-3">Some other options for you:</h1>
+                    </div>
+                 </div>
+                <div class="row mb-3">
+                    <% randomProducts.forEach(randomProduct => { %>
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <div class="product-item mb-3">
+                                <img 
+                                    src="/<%= randomProduct.imageUrl %>" 
+                                    alt="<%= randomProduct.title %>" 
+                                    class="product-item_img"
+                                    width="100%"
+                                    height="auto"
+                                >
+                                <div class="px-3">
+                                    <h4 class="product-item__name my-2"><%= randomProduct.title %></h4>
+                                    <h4 class="product-item__price my-1"><%= randomProduct.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %></h4>
+                                    <p class="product-item__desc my-2"><%= randomProduct.description %></p>
+                                </div>
+                                <div class="card-action mb-3">
+                                    <a href="/menu/<%= randomProduct._id %>" class="btn border border-light text-white">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
                     </div>
                 </div>
             </div>
