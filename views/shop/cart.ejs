@@ -2,11 +2,12 @@
     <link rel="stylesheet" href="/public/css/cart.css">
 </head>
     <body>
+        <% let prodQty = products.length %>
         <%- include('../includes/navigation.ejs') %>
         <main class="main">
             <div class="cart_background"></div>
             <div class="container mb-5">
-                <% if(products.length > 0) {%>
+                <% if(prodQty > 0) {%>
                 <div class="row">
                     <h1 class="my-3 text-center title">Your Cart</h1>
                     <div class="cart-table">

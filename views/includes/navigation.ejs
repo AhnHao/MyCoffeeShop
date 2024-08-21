@@ -16,7 +16,12 @@
           </li>
           <% if(isAuthenticated) {%>
             <li class="nav-item border-end">
-              <a class="nav-link px-4 <%= path === '/cart' ? 'text-warning' : 'text-white' %>" href="/cart">Cart</a>
+              <a class="nav-link px-4 <%= path === '/cart' ? 'text-warning' : 'text-white' %>" href="/cart">
+                Cart
+                <% if(cartItemsQty > 0) {%>
+                  <div class="product-quantity text-white text-center bg-danger rounded-circle"><%= cartItemsQty %></div>
+                <% } %>
+              </a>
             </li>
             <li class="nav-item border-end">
               <a class="nav-link px-4 <%= path === '/orders' ? 'text-warning' : 'text-white' %>" href="/orders">Orders</a>

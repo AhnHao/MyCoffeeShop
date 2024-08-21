@@ -111,6 +111,7 @@ exports.postCart = (req, res, next) => {
       return req.user.addToCart(product)
     })
     .then(result => {
+      req.session.cartItems = req.user.cart.items.length || []
       res.redirect(currentUrl)
     })
 }
@@ -120,6 +121,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
   req.user
     .removeFromCart(prodId)
     .then(result => {
+      req.session.cartItems = req.user.cart.items.length || []
       res.redirect('/cart')
     })
     .catch(err => {
@@ -216,6 +218,7 @@ exports.getCheckoutSuccess = (req, res, next) => {
       return req.user.cleanCart()
     })
     .then(() => {
+      req.session.cartItems = req.user.cart.items.length || []
       res.redirect('/orders')
     })
     .catch(err => {

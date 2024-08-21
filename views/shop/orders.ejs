@@ -13,7 +13,7 @@
                             <% orders.forEach(order=> { %>
                                 <% let totalPayment = 0 %>
                                 <section class="h-100">
-                                    <div class="container py-5 h-100">
+                                    <div class="container pt-5 pb-3 h-100">
                                         <div class="row d-flex justify-content-center align-items-center h-100">
                                             <div class="col-lg-10 col-xl-8">
                                                 <div class="card border border-black">
@@ -74,18 +74,30 @@
                                                                     <hr style="background-color: #e0e0e0; opacity: 1;">
                                                                 </div>
                                                             <% }) %>
+                                                            <div class="border-top">
+                                                                <h5 class="d-flex align-items-center justify-content-between text-black p-3">
+                                                                    <div class="mt-2 fs-5">
+                                                                        <span>
+                                                                            Order Date: 
+                                                                            <%= order.createdAt.toLocaleDateString('vi-VN') %><br>
+                                                                        </span>
+                                                                        <span>
+                                                                            Order Hours:
+                                                                            <%= new Date(order.createdAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) %>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        Total Paid:
+                                                                        <span class="h2 mb-0">
+                                                                            <%= totalPayment.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %>
+                                                                        </span> 
+                                                                    </div>
+                                                                </h5>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer py-4"
                                                         style="background-color: #331a15;">
-                                                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
-                                                            <div>
-                                                                Total Paid:
-                                                                <span class="h2 mb-0 ms-2">
-                                                                    <%= totalPayment.toLocaleString('vi-VN',{ style: 'currency' ,currency: 'VND' }) %>
-                                                                </span> 
-                                                            </div>
-                                                        </h5>
                                                     </div>
                                                 </div>
                                             </div>
