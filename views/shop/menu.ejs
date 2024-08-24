@@ -45,11 +45,16 @@
             <% } %>
         </main>
         <script>
-            function scrollToBottom() {
-                const menuView = document.getElementById('menu-view')
-                menuView.scrollTop = menuView.scrollHeight
-            }
+            window.addEventListener("beforeunload", function () {
+                sessionStorage.setItem("scrollPosition", window.scrollY);
+            })
 
-            window.onload = scrollToBottom
+            // Khôi phục vị trí cuộn khi trang tải lại
+            window.addEventListener("load", function () {
+                const scrollPosition = sessionStorage.getItem("scrollPosition");
+                if (scrollPosition) {
+                    window.scrollTo(0, parseInt(scrollPosition, 10));
+                }
+            })
         </script>
 <%- include('../includes/end.ejs') %>
