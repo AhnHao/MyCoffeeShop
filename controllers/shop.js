@@ -161,8 +161,7 @@ exports.getCheckout = (req, res, next) => {
           }
         }),
         customer_email: req.user.email,
-        success_url:
-          req.protocol + '://' + req.get('host') + '/checkout/success',
+        success_url: req.protocol + '://' + req.get('host') + '/checkout/success',
         cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
       })
     })

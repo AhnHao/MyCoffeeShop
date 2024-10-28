@@ -8,33 +8,34 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item border-end">
-            <a class="nav-link px-4 <%= path === '/' ? 'text-warning' : 'text-white' %>" href="/">Home</a>
-          </li>
-          <li class="nav-item border-end">
-            <a class="nav-link px-4 <%= path === '/menu' ? 'text-warning' : 'text-white' %>" href="/menu">Menu</a>
-          </li>
-          <% if(isAuthenticated) {%>
+          <% if(isAdmin) { %>
             <li class="nav-item border-end">
-              <a class="nav-link px-4 <%= path === '/cart' ? 'text-warning' : 'text-white' %>" href="/cart">
-                Cart
-                <% if(cartItemsQty > 0) {%>
-                  <div class="product-quantity text-white text-center bg-danger rounded-circle"><%= cartItemsQty %></div>
-                <% } %>
-              </a>
+              <a class="nav-link px-4 <%= path === '/admin/products' ? 'text-warning' : 'text-white' %>" href="/admin/products">Admin Product</a>
             </li>
             <li class="nav-item border-end">
-              <a class="nav-link px-4 <%= path === '/orders' ? 'text-warning' : 'text-white' %>" href="/orders">Orders</a>
+              <a class="nav-link px-4 <%= path === '/admin/add-product' ? 'text-warning' : 'text-white' %>" href="/admin/add-product">Add Product</a>
             </li>
-            <% } %>
-            <% if(isAdmin) { %>
+          <% } else {%>
+            <li class="nav-item border-end">
+              <a class="nav-link px-4 <%= path === '/' ? 'text-warning' : 'text-white' %>" href="/">Home</a>
+            </li>
+            <li class="nav-item border-end">
+              <a class="nav-link px-4 <%= path === '/menu' ? 'text-warning' : 'text-white' %>" href="/menu">Menu</a>
+            </li>
+            <% if(isAuthenticated) {%>
               <li class="nav-item border-end">
-                <a class="nav-link px-4 <%= path === '/admin/add-product' ? 'text-warning' : 'text-white' %>" href="/admin/add-product">Add Product</a>
+                <a class="nav-link px-4 <%= path === '/cart' ? 'text-warning' : 'text-white' %>" href="/cart">
+                  Cart
+                  <% if(cartItemsQty > 0) {%>
+                    <div class="product-quantity text-white text-center bg-danger rounded-circle"><%= cartItemsQty %></div>
+                  <% } %>
+                </a>
               </li>
               <li class="nav-item border-end">
-                <a class="nav-link px-4 <%= path === '/admin/products' ? 'text-warning' : 'text-white' %>" href="/admin/products">Admin Product</a>
+                <a class="nav-link px-4 <%= path === '/orders' ? 'text-warning' : 'text-white' %>" href="/orders">Orders</a>
               </li>
-            <% } %>
+              <% } %>
+          <% } %>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <% if(!isAuthenticated) {%>
