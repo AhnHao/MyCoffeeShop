@@ -16,7 +16,7 @@ body {
 :root {
   --main-color: #331a15;
   --sub-color: #4f1016;
-  --navbar-height: 84.35px
+  --navbar-height: 84.35px;
 }
 
 .main {
@@ -24,7 +24,7 @@ body {
 }
 
 .navbar_config {
-  background-color: var(--main-color); 
+  background-color: var(--main-color);
   position: fixed !important;
   top: 0;
   left: 0;
@@ -54,8 +54,8 @@ body {
   text-shadow: 2px 2px 4px #000000;
 }
 
-.title{
-  color: #F5DEB3;
+.title {
+  color: #f5deb3;
   text-transform: uppercase;
   text-shadow: 2px 2px 4px #000000;
 }
@@ -99,7 +99,7 @@ body {
   border-radius: 3px;
   background: #b9c9ff;
   text-align: center;
-} 
+}
 
 .user-message--error {
   border-color: red;
@@ -112,7 +112,7 @@ body {
   border: 2px solid red;
 }
 
-.active>.page-link {
+.active > .page-link {
   background-color: var(--sub-color) !important;
   border-color: #fff !important;
 }
@@ -129,4 +129,16 @@ body {
 
 .page-link:focus {
   box-shadow: 0 0 0 0.25rem rgba(51, 26, 21, 0.4) !important;
+}
+
+.alert.flash-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; 
+  width: auto;
+  max-width: 80%;
+  text-align: center;
+  min-width: 40%;
 }

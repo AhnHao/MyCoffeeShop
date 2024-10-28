@@ -7,6 +7,12 @@
             <div class="admin_background"></div>
             <% if(products.length > 0) { %>
                 <div class="container">
+                    <% if(successMessage) { %>
+                        <div class="alert alert-success alert-dismissible fade show flash-message" role="alert">
+                          <h4><%= successMessage %></h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
                     <div class="row mb-3">
                        <div class="col-md-12">
                           <h1 class="title text-center mt-3">Products Management</h1>

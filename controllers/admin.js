@@ -66,7 +66,7 @@ exports.postAddProduct = (req, res, next) => {
   product
     .save()
     .then(result => {
-      console.log('Created Product')
+      req.flash('success', 'Product added successfully')
       res.redirect('/admin/products')
     })
     .catch(err => {
@@ -77,6 +77,7 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getProducts = (req, res, next) => {
+  let successMessage = req.flash('success')
   const page = +req.query.page || 1
   let totalItems
 
@@ -93,6 +94,7 @@ exports.getProducts = (req, res, next) => {
         pageTitle: 'Admin Products',
         products: products,
         path: '/admin/products',
+        successMessage: successMessage.length > 0 ? successMessage[0] : null,
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
@@ -172,7 +174,7 @@ exports.postEditProduct = (req, res, next) => {
       return product.save()
     })
     .then(result => {
-      console.log('Updated product')
+      req.flash('success', 'Product edited successfully')
       res.redirect('/admin/products')
     })
     .catch(err => {
@@ -193,7 +195,7 @@ exports.postDeleteProduct = (req, res, next) => {
       return Product.findByIdAndDelete(prodId)
     })
     .then(() => {
-      console.log('Removed Product')
+      req.flash('success', 'Product deleted successfully')
       res.redirect('/admin/products')
     })
     .catch(err => {

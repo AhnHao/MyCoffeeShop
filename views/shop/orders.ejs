@@ -7,6 +7,12 @@
             <main class="main">
                 <div class="orders_background"></div>
                 <div class="container">
+                    <% if(successMessage) { %>
+                        <div class="alert alert-success alert-dismissible fade show flash-message" role="alert">
+                          <h4><%= successMessage %></h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
                     <% if(orders.length <= 0) { %>
                         <h1 class="text-center title pt-5 h-100">Nothing here!</h1>
                         <% } else { %>
@@ -63,7 +69,7 @@
                                                                         <div
                                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                                             <p class="text-muted mb-0 small">
-                                                                                Total: <%= (p.product.price *
+                                                                                <%= (p.product.price *
                                                                                     p.quantity).toLocaleString('vi-VN',
                                                                                     { style: 'currency' ,
                                                                                     currency: 'VND' }) %>

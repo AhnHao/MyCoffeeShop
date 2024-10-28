@@ -16,16 +16,13 @@ const transporter = nodemailer.createTransport({
 })
 
 exports.getLogin = (req, res) => {
-  let message = req.flash('error')
-  if (message.length > 0) {
-    message = message[0]
-  } else {
-    message = null
-  }
+  let errorMessage = req.flash('error')
+  let successMessage = req.flash('success')
   res.render('auth/login', {
     pageTitle: 'Login',
     path: '/login',
-    errorMessage: message,
+    errorMessage: errorMessage.length > 0 ? errorMessage[0] : null,
+    successMessage: successMessage.length > 0 ? successMessage[0] : null,
     oldInput: {
       email: '',
       password: ''
@@ -44,6 +41,7 @@ exports.postLogin = (req, res, next) => {
       pageTitle: 'Login',
       path: '/login',
       errorMessage: errors.array()[0].msg,
+      successMessage: null,
       oldInput: {
         email: email,
         password: password
@@ -59,6 +57,7 @@ exports.postLogin = (req, res, next) => {
           pageTitle: 'Login',
           path: '/login',
           errorMessage: 'Invalid email or password',
+          successMessage: null,
           oldInput: {
             email: email,
             password: password
@@ -88,6 +87,7 @@ exports.postLogin = (req, res, next) => {
             pageTitle: 'Login',
             path: '/login',
             errorMessage: 'Invalid email or password',
+            successMessage: null,
             oldInput: {
               email: email,
               password: password
@@ -156,6 +156,7 @@ exports.postSignup = (req, res, next) => {
       return user.save()
     })
     .then(result => {
+      req.flash('success', 'Congratulations on successfully registering an account')
       res.redirect('/login')
       return transporter.sendMail({
         from: 'anteiku@coffee.com',
@@ -210,6 +211,7 @@ exports.postResetPassword = (req, res, next) => {
         return user.save()
       })
       .then(result => {
+        req.flash('success', 'Please check your email to change your password')
         res.redirect('/')
         transporter.sendMail({
           from: 'anteiku@coffee.com',
@@ -277,6 +279,7 @@ exports.postNewPassword = (req, res, next) => {
       return resetUser.save()
     })
     .then(result => {
+      req.flash('success', 'You have successfully changed your password')
       return res.redirect('/login')
     })
     .catch(err => {

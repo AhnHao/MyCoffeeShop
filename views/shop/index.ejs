@@ -7,6 +7,14 @@
             <div class="home__background"></div>
             <div class="container mt-5">
                 <div class="row">
+                    <% if(successMessage) { %>
+                      <div class="alert alert-success alert-dismissible fade show flash-message" role="alert">
+                        <h4><%= successMessage %></h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    <% } %>
+                </div>
+                <div class="row">
                     <div class="col-md-5">
                         <div class="desc mt-4 d-flex flex-column justify-content-center">
                             <h4 class="title mb-3">Welcome to Anteiku</h4>

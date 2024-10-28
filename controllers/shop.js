@@ -7,12 +7,14 @@ const stripe = require('stripe')(process.env.SECRET_KEY)
 const ITEMS_PER_PAGE = 8
 
 exports.getIndex = (req, res, next) => {
+  let successMessage = req.flash('success')
   Product.find()
     .then(products => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Home',
-        path: '/'
+        path: '/',
+        successMessage: successMessage.length > 0 ? successMessage[0] : null
       })
     })
     .catch(err => {
@@ -182,11 +184,13 @@ exports.getCheckout = (req, res, next) => {
 }
 
 exports.getOrder = (req, res, next) => {
-  Order.find({ 'user.userId': req.user._id })
+  let successMessage = req.flash('success')
+  Order.find({ 'user.userId': req.user._id }).sort({ createdAt: -1 })
     .then(orders => {
       res.render('shop/orders', {
         pageTitle: 'Your Orders',
         path: '/orders',
+        successMessage: successMessage.length > 0 ? successMessage[0] : null,
         orders: orders
       })
     })
@@ -217,6 +221,7 @@ exports.getCheckoutSuccess = (req, res, next) => {
       return req.user.cleanCart()
     })
     .then(() => {
+      req.flash('success', 'Congratulations on your successful order!')
       req.session.cartItems = req.user.cart.items.length || []
       res.redirect('/orders')
     })

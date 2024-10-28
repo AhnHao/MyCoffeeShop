@@ -8,9 +8,12 @@
         <div class="addProduct_background"></div>
         <div class="container">
             <div class="row">
-            <% if(errorMessage) { %>
-                <div class="user-message user-message--error mt-3"><%= errorMessage %></div>
-            <% } %>
+                <% if(errorMessage) { %>
+                    <div class="alert alert-danger alert-dismissible fade show flash-message" role="alert">
+                      <h4><%= errorMessage %></h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% } %>
             </div>
             <div class="row">
                 <div class="d-flex justify-content-center">
