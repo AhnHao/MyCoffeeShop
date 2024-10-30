@@ -56,7 +56,7 @@ userSchema.methods.addToCart = function (product) {
   const updatedCart = {
     items: updatedCartItems
   }
-  
+
   this.cart = updatedCart
   return this.save()
 }
@@ -70,8 +70,17 @@ userSchema.methods.removeFromCart = function (productId) {
   return this.save()
 }
 
-userSchema.methods.cleanCart = function() {
+userSchema.methods.cleanCart = function () {
   this.cart = { items: [] }
+  return this.save()
+}
+
+userSchema.methods.updateCartQuantity = function (productId, newQuantity) {
+  const cartProductIndex = this.cart.items.findIndex(item => {
+    return item.productId.toString() === productId.toString()
+  })
+
+  this.cart.items[cartProductIndex].quantity = newQuantity
   return this.save()
 }
 

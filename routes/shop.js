@@ -15,6 +15,8 @@ router.get('/cart', isAuth, shopController.getCart)
 
 router.post('/cart', isAuth, shopController.postCart)
 
+router.post('/cart-update-quantity', isAuth, shopController.postUpdateQuantityProduct)
+
 router.post('/cart-delete-product', isAuth, shopController.postCartDeleteProduct)
 
 router.get('/checkout', isAuth, shopController.getCheckout)

@@ -37,7 +37,11 @@
                                             <%= p.productId.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
                                         </td>
                                         <td>
-                                            <%= p.quantity %>
+                                            <form action="/cart-update-quantity" method="POST" class="d-flex align-items-center justify-content-center">
+                                                <input type="number" name="newQuantity" value="<%= p.quantity %>" style="width: 10%;" min="1" max="10">
+                                                <input type="hidden" name="productId" value="<%= p.productId._id %>">
+                                                <button type="submit" class="btn btn-success border btn-sm ms-2">Update</button>
+                                            </form>
                                         </td>
                                         <td>
                                             <%= (p.quantity * p.productId.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
@@ -46,7 +50,7 @@
                                         <td>
                                             <form action="/cart-delete-product" method="POST">
                                                 <input type="hidden" name="productId" value="<%= p.productId._id %>">
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                <button type="submit" class="btn btn-danger border btn-sm">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

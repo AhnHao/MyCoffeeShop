@@ -118,6 +118,21 @@ exports.postCart = (req, res, next) => {
     })
 }
 
+exports.postUpdateQuantityProduct = (req, res, next) => {
+  const proId = req.body.productId
+  const newQuantity = req.body.newQuantity
+  req.user
+    .updateCartQuantity(proId, newQuantity)
+    .then(result => {
+      res.redirect('/cart')
+    })
+    .catch(err => {
+      const error = new Error(err)
+      error.httpStatusCode = 500
+      return next(err)
+    })
+}
+
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId
   req.user
@@ -163,7 +178,8 @@ exports.getCheckout = (req, res, next) => {
           }
         }),
         customer_email: req.user.email,
-        success_url: req.protocol + '://' + req.get('host') + '/checkout/success',
+        success_url:
+          req.protocol + '://' + req.get('host') + '/checkout/success',
         cancel_url: req.protocol + '://' + req.get('host') + '/checkout/cancel'
       })
     })
@@ -185,7 +201,8 @@ exports.getCheckout = (req, res, next) => {
 
 exports.getOrder = (req, res, next) => {
   let successMessage = req.flash('success')
-  Order.find({ 'user.userId': req.user._id }).sort({ createdAt: -1 })
+  Order.find({ 'user.userId': req.user._id })
+    .sort({ createdAt: -1 })
     .then(orders => {
       res.render('shop/orders', {
         pageTitle: 'Your Orders',
