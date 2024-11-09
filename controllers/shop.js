@@ -25,6 +25,7 @@ exports.getIndex = (req, res, next) => {
 }
 
 exports.getMenu = (req, res, next) => {
+  let errorMessage = req.flash('error')
   const page = +req.query.page || 1
   let totalItems
   const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
@@ -42,7 +43,9 @@ exports.getMenu = (req, res, next) => {
         products: products,
         pageTitle: 'Menu',
         path: '/menu',
+        errorMessage: errorMessage.length > 0 ? errorMessage[0] : null,
         currentUrl: currentUrl,
+        hasPagination: true,
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
@@ -75,7 +78,7 @@ exports.getProduct = (req, res, next) => {
       res.render('shop/product-detail', {
         product: currentProduct,
         pageTitle: currentProduct.title,
-        path: '/product-detail',
+        path: '/menu',
         currentUrl: currentUrl,
         randomProducts: randomProducts
       })
@@ -87,7 +90,43 @@ exports.getProduct = (req, res, next) => {
     })
 }
 
+//
+exports.getSearchProducts = (req, res, next) => {
+  const query = req.query.q
+  const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+
+  if (!query) {
+    req.flash('error', 'Please enter what you want to search for')
+    return res.redirect('/menu')
+  }
+
+  Product.find({
+    $or: [
+      { title: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } }
+    ]
+  })
+    .then(products => {
+      res.render('shop/menu', {
+        products: products,
+        pageTitle: 'Menu',
+        path: '/menu',
+        errorMessage: null,
+        currentUrl: currentUrl,
+        hasPagination: false,
+      })
+    })
+    .catch(err => {
+      const error = new Error(err)
+      error.httpStatusCode = 500
+      return next(err)
+    })
+}
+
+//
+
 exports.getCart = (req, res, next) => {
+  let successMessage = req.flash('success')
   req.user
     .populate('cart.items.productId')
     .then(user => {
@@ -95,7 +134,8 @@ exports.getCart = (req, res, next) => {
       res.render('shop/cart', {
         pageTitle: 'Your Cart',
         path: '/cart',
-        products: products
+        products: products,
+        successMessage: successMessage.length > 0 ? successMessage[0] : null
       })
     })
     .catch(err => {
@@ -124,7 +164,8 @@ exports.postUpdateQuantityProduct = (req, res, next) => {
   req.user
     .updateCartQuantity(proId, newQuantity)
     .then(result => {
-      res.redirect('/cart')
+      req.flash('success', 'Product quantity updated successfully')
+      return res.redirect('/cart')
     })
     .catch(err => {
       const error = new Error(err)
@@ -138,8 +179,9 @@ exports.postCartDeleteProduct = (req, res, next) => {
   req.user
     .removeFromCart(prodId)
     .then(result => {
+      req.flash('success', 'Product removed from cart successfully')
       req.session.cartItems = req.user.cart.items.length || []
-      res.redirect('/cart')
+      return res.redirect('/cart')
     })
     .catch(err => {
       const error = new Error(err)
@@ -240,7 +282,7 @@ exports.getCheckoutSuccess = (req, res, next) => {
     .then(() => {
       req.flash('success', 'Congratulations on your successful order!')
       req.session.cartItems = req.user.cart.items.length || []
-      res.redirect('/orders')
+      return res.redirect('/orders')
     })
     .catch(err => {
       const error = new Error(err)

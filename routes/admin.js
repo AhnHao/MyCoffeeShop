@@ -20,6 +20,8 @@ router.post(
 
 router.get('/products', isAuth, adminController.getProducts)
 
+router.get('/search', isAuth, adminController.getSearchProducts)
+
 router.get('/edit-product/:productId', isAuth, adminController.getEditProduct)
 
 router.post(

@@ -79,7 +79,7 @@ exports.postLogin = (req, res, next) => {
             })
           }
           req.flash('error', 'Invalid email or password')
-          res.redirect('/login')
+          return res.redirect('/login')
         })
         .catch(err => {
           console.log(err)
@@ -231,7 +231,7 @@ exports.postResetPassword = (req, res, next) => {
   })
 }
 
-exports.getNewPassword = (req, res) => {
+exports.getNewPassword = (req, res, next) => {
   const token = req.params.token
   User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
     .then(user => {

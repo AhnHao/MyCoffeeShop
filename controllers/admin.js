@@ -67,7 +67,7 @@ exports.postAddProduct = (req, res, next) => {
     .save()
     .then(result => {
       req.flash('success', 'Product added successfully')
-      res.redirect('/admin/products')
+      return res.redirect('/admin/products')
     })
     .catch(err => {
       const error = new Error(err)
@@ -78,6 +78,7 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   let successMessage = req.flash('success')
+  let errorMessage = req.flash('error')
   const page = +req.query.page || 1
   let totalItems
 
@@ -94,13 +95,48 @@ exports.getProducts = (req, res, next) => {
         pageTitle: 'Admin Products',
         products: products,
         path: '/admin/products',
+        errorMessage: errorMessage.length > 0 ? errorMessage[0] : null,
         successMessage: successMessage.length > 0 ? successMessage[0] : null,
+        hasPagination: true,
         currentPage: page,
         hasNextPage: ITEMS_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
         nextPage: page + 1,
         previousPage: page - 1,
         lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE)
+      })
+    })
+    .catch(err => {
+      const error = new Error(err)
+      error.httpStatusCode = 500
+      return next(err)
+    })
+}
+
+exports.getSearchProducts = (req, res, next) => {
+  const query = req.query.q
+  const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+
+  if (!query) {
+    req.flash('error', 'Please enter what you want to search for')
+    return res.redirect('/admin/products')
+  }
+
+  Product.find({
+    $or: [
+      { title: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } }
+    ]
+  })
+    .then(products => {
+      res.render('admin/products', {
+        products: products,
+        pageTitle: 'Admin Products',
+        path: '/admin/products',
+        errorMessage: null,
+        successMessage: null,
+        currentUrl: currentUrl,
+        hasPagination: false,
       })
     })
     .catch(err => {
@@ -175,7 +211,7 @@ exports.postEditProduct = (req, res, next) => {
     })
     .then(result => {
       req.flash('success', 'Product edited successfully')
-      res.redirect('/admin/products')
+      return res.redirect('/admin/products')
     })
     .catch(err => {
       const error = new Error(err)
@@ -196,14 +232,11 @@ exports.postDeleteProduct = (req, res, next) => {
     })
     .then(() => {
       req.flash('success', 'Product deleted successfully')
-      res.redirect('/admin/products')
+      return res.redirect('/admin/products')
     })
     .catch(err => {
       const error = new Error(err)
       error.httpStatusCode = 500
-      return next(err)
-    })
-    .catch(err => {
       return next(err)
     })
 }

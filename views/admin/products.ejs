@@ -7,6 +7,12 @@
             <div class="admin_background"></div>
             <% if(products.length > 0) { %>
                 <div class="container">
+                    <% if(errorMessage) { %>
+                        <div class="alert alert-danger alert-dismissible fade show flash-message" role="alert">
+                          <h4><%= errorMessage %></h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
                     <% if(successMessage) { %>
                         <div class="alert alert-success alert-dismissible fade show flash-message" role="alert">
                           <h4><%= successMessage %></h4>
@@ -17,6 +23,12 @@
                        <div class="col-md-12">
                           <h1 class="title text-center mt-3">Products Management</h1>
                        </div>
+                    </div>
+                    <div class="row">
+                        <form action="/admin/search" method="GET" class="d-flex justify-content-end">
+                            <input type="text" name="q" class="me-2 w-25 h-100 rounded py-2 px-3" placeholder="Enter the keyword you want to search for">
+                            <button type="submit" class="btn_hover btn border border-light text-white text-uppercase fw-bold">search</button>
+                        </form>
                     </div>
                     <div class="row">
                         <% products.forEach(product => { %>
@@ -41,9 +53,11 @@
                             </div>
                         <% }) %>
                     </div>
-                    <div class="row my-3">
-                        <%- include('../includes/pagination.ejs', {currentPage: currentPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage }) %>
-                    </div>
+                    <% if(hasPagination) { %>
+                        <div class="row my-3">
+                            <%- include('../includes/pagination.ejs', {currentPage: currentPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage }) %>
+                        </div>
+                    <% } %>
                  </div>
             <% } else { %>
                 <h1 class="pt-5 title text-center">No products here!</h1>

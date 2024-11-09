@@ -11,6 +11,8 @@ router.get('/menu', shopController.getMenu)
 
 router.get('/menu/:productId', shopController.getProduct)
 
+router.get('/search', shopController.getSearchProducts)
+
 router.get('/cart', isAuth, shopController.getCart)
 
 router.post('/cart', isAuth, shopController.postCart)
