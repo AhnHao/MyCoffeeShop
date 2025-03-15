@@ -156,7 +156,10 @@ exports.postSignup = (req, res, next) => {
       return user.save()
     })
     .then(result => {
-      req.flash('success', 'Congratulations on successfully registering an account')
+      req.flash(
+        'success',
+        'Congratulations on successfully registering an account'
+      )
       res.redirect('/login')
       return transporter.sendMail({
         from: 'anteiku@coffee.com',
@@ -199,6 +202,7 @@ exports.postResetPassword = (req, res, next) => {
       console.log(err)
       return res.redirect('/reset')
     }
+    const BASE_URL = `${req.protocol}://${req.get('host')}`
     const token = buffer.toString('hex')
     User.findOne({ email: req.body.email })
       .then(user => {
@@ -219,7 +223,7 @@ exports.postResetPassword = (req, res, next) => {
           subject: 'Password Reset',
           html: `
             <p>You requested a password reset</p>
-            <p>click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password</p>
+            <p>click this <a href="${BASE_URL}/reset/${token}">link</a> to set a new password</p>
           `
         })
       })
