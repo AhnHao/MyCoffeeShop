@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:18
 # Tạo thư mục và thiết lập quyền
 WORKDIR /home/node/app
 RUN mkdir -p node_modules && chown -R node:node /home/node/app
