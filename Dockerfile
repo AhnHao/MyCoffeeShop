@@ -1,17 +1,17 @@
 FROM node:22-alpine
 
-# Tạo thư mục và đảm bảo quyền sở hữu đúng
-RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 
 COPY package*.json ./
 
-USER node  # Chạy các lệnh sau dưới quyền user node
+USER node
 
 RUN npm install
 
 COPY --chown=node:node . .
 
 EXPOSE 3000
-CMD ["node", "app.js"]
+
+CMD [ "node", "app.js" ]
