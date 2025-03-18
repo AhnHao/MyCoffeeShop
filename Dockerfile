@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Tạo thư mục và thiết lập quyền
 WORKDIR /home/node/app
