@@ -1,21 +1,17 @@
-FROM node:18
-# Tạo thư mục và thiết lập quyền
-WORKDIR /home/node/app
-RUN mkdir -p node_modules && chown -R node:node /home/node/app
+FROM node:21-alpine
 
-# Copy package.json trước để tối ưu cache
+# Tạo thư mục và đảm bảo quyền sở hữu đúng
+RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
+
+WORKDIR /home/node/app
+
 COPY package*.json ./
 
-# Chạy npm install với user node
-USER node
-RUN npm install
+USER node  # Chạy các lệnh sau dưới quyền user node
 
-# Copy toàn bộ source code với quyền user node
+RUN npm install --unsafe-perm
+
 COPY --chown=node:node . .
 
-# Expose port
 EXPOSE 3000
-
-# Chạy ứng dụng
 CMD ["node", "app.js"]
-
