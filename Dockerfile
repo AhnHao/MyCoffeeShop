@@ -1,20 +1,22 @@
-# Sử dụng Node.js phiên bản LTS
- FROM node:18
- 
- # Đặt thư mục làm việc trong container
- WORKDIR /app
- 
- # Copy file package.json và package-lock.json trước để cache dependencies
- COPY package*.json ./
- 
- # Cài đặt dependencies
- RUN npm install
- 
- # Copy toàn bộ source code vào container
- COPY . .
- 
- # Expose port để container lắng nghe (dùng giá trị từ file .env)
- EXPOSE 3000
- 
- # Lệnh chạy ứng dụng
- CMD ["npm", "start"]
+FROM node:10-alpine
+
+# Tạo thư mục và thiết lập quyền
+WORKDIR /home/node/app
+RUN mkdir -p node_modules && chown -R node:node /home/node/app
+
+# Copy package.json trước để tối ưu cache
+COPY package*.json ./
+
+# Chạy npm install với user node
+USER node
+RUN npm install
+
+# Copy toàn bộ source code với quyền user node
+COPY --chown=node:node . .
+
+# Expose port
+EXPOSE 3000
+
+# Chạy ứng dụng
+CMD ["node", "app.js"]
+
