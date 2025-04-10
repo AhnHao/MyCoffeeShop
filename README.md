@@ -1,6 +1,9 @@
 # Anteiku Coffee Shop
 
-Anteiku Coffee Shop là một ứng dụng web quản lý cửa hàng cà phê, cung cấp các tính năng như quản lý sản phẩm, giỏ hàng, thanh toán trực tuyến, và gửi email thông báo.
+Anteiku Coffee Shop là một ứng dụng web quản lý cửa hàng cà phê, cung cấp các tính năng như quản lý sản phẩm, giỏ hàng, thanh toán trực tuyến, và gửi email thông báo.   
+Đăng nhập giao diện quản lý bằng tài khoản:   
+tài khoản: admin@anteikucoffee.com
+mật khẩu: anhhao
 
 ## **Chức năng chính**
 
